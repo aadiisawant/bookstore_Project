@@ -1,0 +1,33 @@
+<div th:replace="@{/header.html}"></div>
+<div class="row">
+	<div class="col-md-8 my-5 mx-auto">
+		<div class="d-flex justify-content-between p-2">
+			<h3>Available Books</h3>
+			<form th:action="@{/search}" method="post" class="d-flex">
+				<input type="text" name="key" class="form-control me-1" required>
+				<input type="submit" value="Search" class="btn btn-primary">
+			</form>
+		</div>
+		<table class="table table-striped">
+			<thead class="bg-primary text-light">
+				<tr>
+					<th>Title</th>
+					<th>Author</th>
+					<th>Price</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+		<tbody>
+			<tr th:each="book : ${books}">
+				<td th:text="${book.getTitle()}"></td>
+				<td th:text="${book.getAuthor()}"></td>
+				<td th:text="${book.getPrice()}"></td>
+				<td>
+					<a th:href="@{/update/} +${book.getId()}" class="btn btn-sm btn-outline-info">Update</a>
+					<a th:href="@{/delete/} +${book.getId()}" class="btn btn-sm btn-outline-danger">Delete</a>
+				</td>
+			</tr>
+		</tbody>
+		</table>
+	</div>
+</div>
